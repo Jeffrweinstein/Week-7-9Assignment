@@ -48,6 +48,9 @@ public class ProjectsApp {
 			 case 4:
 				 updateProjectDetails();
 				 break;
+			 case 5:
+				 deleteProject();
+				 break;
 			default:
 				System.out.println("\n" + selection + " is not a valid selection. Try again.");
 				break;
@@ -65,6 +68,20 @@ public class ProjectsApp {
 	
 		
 	
+	private void deleteProject() {
+		listProjects();
+		
+		Integer projectId =  getIntInput("Enter the ID of the project to delete");
+		
+		projectService.deleteProject(projectId);
+		System.out.println("Project " + projectId + " was deleted successfully");
+		
+		if(Objects.nonNull(curProject) && curProject.getProjectId().equals(projectId)) {
+			curProject = null;
+		}
+		
+		
+	}
 	private void updateProjectDetails() {
 		if(Objects.isNull(curProject)) {
 			System.out.println("\nPlease select a project.");
